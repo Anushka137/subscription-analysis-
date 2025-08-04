@@ -1,0 +1,397 @@
+[
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql": "\nSELECT \n    CASE WHEN status = 'ACTIVE' THEN 'Successful' ELSE 'Failed' END as category,\n    COUNT(*) as value\nFROM subscription_payment_details\nGROUP BY CASE WHEN status = 'ACTIVE' THEN 'Successful' ELSE 'Failed' END\n",
+    "was_helpful": true,
+    "feedback_type": "positive",
+    "timestamp": "2025-08-02T21:46:19.187485",
+    "chart_type": null,
+    "query_category": "pie_chart_request",
+    "sql_complexity": "simple",
+    "success_score": 1.0
+  },
+  {
+    "question": "Show me database status",
+    "sql_query": "SELECT COUNT(*) AS total_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE();",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T17:46:15"
+  },
+  {
+    "question": "Show me payment success rates for last 30 days",
+    "sql_query": "SELECT COUNT(CASE WHEN p.status = 'ACTIVE' THEN 1 END) * 100 / COUNT(*) AS success_rate FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id WHERE p.created_date >= DATE_SUB(CURDATE(),INTERVAL 30 DAY);",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T17:46:33"
+  },
+  {
+    "question": "cli",
+    "sql_query": "SELECT COALESCE(c.user_email,'Not provided') AS user_email,c.subscription_id,c.merchant_user_id,c.renewal_amount,c.max_amount_decimal,c.subcription_start_date,c.subcription_end_date,c.status,SUM(p.trans_amount_decimal) AS total_revenue FROM subscription_contract_v2 c LEFT JOIN subscription_payment_details p ON c.subscription_id = p.subscription_id AND p.status = 'ACTIVE' GROUP BY c.subscription_id,c.merchant_user_id,c.user_email,c.renewal_amount,c.max_amount_decimal,c.subcription_start_date,c.subcription_end_date,c.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T17:47:38"
+  },
+  {
+    "question": " success rate vs failure rate",
+    "sql_query": "SELECT SUM(CASE WHEN p.status = 'ACTIVE' THEN 1 ELSE 0 END) AS success_count,SUM(CASE WHEN p.status != 'ACTIVE' THEN 1 ELSE 0 END) AS failure_count FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T17:48:37"
+  },
+  {
+    "question": "Show me a pie chart of payment status",
+    "sql_query": "SELECT p.status,COUNT(*) AS count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T18:13:32"
+  },
+  {
+    "question": "cli",
+    "sql_query": "SELECT COALESCE(c.user_email,'Not provided') AS user_email,c.subscription_id,c.merchant_user_id,c.renewal_amount,c.max_amount_decimal,c.subcription_start_date,c.subcription_end_date,c.status AS contract_status,SUM(p.trans_amount_decimal) AS total_revenue FROM subscription_contract_v2 c JOIN subscription_payment_details p ON c.subscription_id = p.subscription_id WHERE p.status = 'ACTIVE' GROUP BY c.subscription_id LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T18:13:51"
+  },
+  {
+    "question": "cli",
+    "sql_query": "SELECT COALESCE(c.user_email,'Not provided') AS user_email,c.subscription_id,c.merchant_user_id,c.renewal_amount,c.max_amount_decimal,c.subcription_start_date,c.subcription_end_date,c.status AS contract_status,SUM(p.trans_amount_decimal) AS total_revenue FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id WHERE p.status = 'ACTIVE' GROUP BY c.subscription_id LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T18:15:35"
+  },
+  {
+    "question": " success rate vs failure rate",
+    "sql_query": "SELECT SUM(CASE WHEN p.status = 'ACTIVE' THEN 1 ELSE 0 END) AS successful_payments,SUM(CASE WHEN p.status != 'ACTIVE' THEN 1 ELSE 0 END) AS failed_payments FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T18:16:05"
+  },
+  {
+    "question": "cli",
+    "sql_query": "SELECT COALESCE(c.user_email,'Not provided') AS user_email,c.subscription_id,c.merchant_user_id,c.renewal_amount,c.max_amount_decimal,c.subcription_start_date,c.subcription_end_date,c.status AS contract_status,SUM(p.trans_amount_decimal) AS total_revenue FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id WHERE p.status = 'ACTIVE' GROUP BY c.subscription_id LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T18:19:08"
+  },
+  {
+    "question": "Show me payment success rates",
+    "sql_query": "SELECT COUNT(CASE WHEN p.status = 'ACTIVE' THEN 1 END) * 100 / COUNT(*) AS success_rate FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T18:25:16"
+  },
+  {
+    "question": "success rate vs failure rate pie chart",
+    "sql_query": "SELECT SUM(CASE WHEN p.status = 'ACTIVE' THEN 1 ELSE 0 END) AS success_count,SUM(CASE WHEN p.status != 'ACTIVE' THEN 1 ELSE 0 END) AS failure_count FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id;",
+    "was_helpful": false,
+    "improvement_suggestion": "incorrect pie chart generated",
+    "chart_type": null,
+    "timestamp": "2025-08-02T18:28:27"
+  },
+  {
+    "question": "Show me a pie chart of payment status",
+    "sql_query": "SELECT p.status,COUNT(*) AS count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:00:00"
+  },
+  {
+    "question": "pie chart of success rate s failure rate",
+    "sql_query": "SELECT SUM(CASE WHEN p.status = 'ACTIVE' THEN 1 ELSE 0 END) AS success_count,SUM(CASE WHEN p.status != 'ACTIVE' THEN 1 ELSE 0 END) AS failure_count FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id;",
+    "was_helpful": false,
+    "improvement_suggestion": "incorrect pie chart",
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:08:27"
+  },
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:09:26"
+  },
+  {
+    "question": "Show payment success rate for merchants with more than 1 transaction visually",
+    "sql_query": "SELECT c.merchant_user_id,COUNT(CASE WHEN p.status = 'ACTIVE' THEN 1 END) AS successful_payments,COUNT(*) AS total_payments,(COUNT(CASE WHEN p.status = 'ACTIVE' THEN 1 END) / COUNT(*)) * 100 AS success_rate FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id GROUP BY c.merchant_user_id HAVING COUNT(*) > 1 LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:10:36"
+  },
+  {
+    "question": "number of merchants with more than 5 subscriptions and number of merchants with more than 5 payments",
+    "sql_query": "SELECT COUNT(DISTINCT c.merchant_user_id) AS merchants_with_more_than_5_subscriptions,(SELECT COUNT(DISTINCT merchant_user_id) FROM subscription_payment_details WHERE subscription_id IN (SELECT subscription_id FROM subscription_payment_details GROUP BY subscription_id HAVING COUNT(*) > 5)) AS merchants_with_more_than_5_payments FROM subscription_contract_v2 c GROUP BY c.merchant_user_id HAVING COUNT(*) > 5;",
+    "was_helpful": false,
+    "improvement_suggestion": "no output",
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:11:07"
+  },
+  {
+    "question": "Show me a pie chart of payment status",
+    "sql_query": "SELECT p.status,COUNT(*) AS count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:11:32"
+  },
+  {
+    "question": "Show me payment status",
+    "sql_query": "SELECT p.status FROM subscription_payment_details p LIMIT 20;",
+    "was_helpful": false,
+    "improvement_suggestion": "Use a bar chart",
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:13:24"
+  },
+  {
+    "question": "Show me a pie chart of payment status",
+    "sql_query": "SELECT p.status,COUNT(*) AS count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:26:30"
+  },
+  {
+    "question": "Visualize payment data with a bar chart",
+    "sql_query": "SELECT DATE(p.created_date) AS payment_date,SUM(p.trans_amount_decimal) AS total_revenue FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id WHERE p.status = 'ACTIVE' GROUP BY payment_date ORDER BY payment_date LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:35:31"
+  },
+  {
+    "question": "Visualize payment data with a bar chart",
+    "sql_query": "SELECT DATE(p.created_date) AS payment_date,SUM(p.trans_amount_decimal) AS total_revenue FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id WHERE p.status = 'ACTIVE' GROUP BY payment_date ORDER BY payment_date LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:37:05"
+  },
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:38:25"
+  },
+  {
+    "question": "Tell me the last date for which data is available",
+    "sql_query": "SELECT MAX(p.created_date) FROM subscription_payment_details p;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:39:29"
+  },
+  {
+    "question": "Number of subscriptions on 24 april 2025",
+    "sql_query": "SELECT COUNT(DISTINCT c.subscription_id) FROM subscription_contract_v2 c WHERE c.subcription_start_date <= '2025-04-24' AND c.subcription_end_date >= '2025-04-24';",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:39:57"
+  },
+  {
+    "question": "Revenue for 24 april 2025",
+    "sql_query": "SELECT SUM(p.trans_amount_decimal) FROM subscription_payment_details p JOIN subscription_contract_v2 c ON p.subscription_id = c.subscription_id WHERE p.status = 'ACTIVE' AND DATE(p.created_date) = '2025-04-24';",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:40:46"
+  },
+  {
+    "question": "total subscriptions in the month of june",
+    "sql_query": "SELECT COUNT(DISTINCT c.subscription_id) FROM subscription_contract_v2 c WHERE MONTH(c.subcription_start_date) = 6;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-02T19:52:50"
+  },
+  {
+    "question": "Show me a bar chart of subscription trends",
+    "sql_query": "SELECT DATE(c.subcription_start_date) AS subscription_date,COUNT(*) AS subscription_count FROM subscription_contract_v2 c GROUP BY subscription_date ORDER BY subscription_date LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T05:59:39"
+  },
+  {
+    "question": "Show me a bar chart of subscription trends",
+    "sql_query": "SELECT DATE(c.subcription_start_date) AS subscription_date,COUNT(*) AS subscription_count FROM subscription_contract_v2 c GROUP BY subscription_date ORDER BY subscription_date LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:00:25"
+  },
+  {
+    "question": "Show me a bar chart of subscription trends",
+    "sql_query": "SELECT DATE(c.subcription_start_date) AS subscription_date,COUNT(*) AS subscription_count FROM subscription_contract_v2 c GROUP BY subscription_date ORDER BY subscription_date LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:06:32"
+  },
+  {
+    "question": "Show me a bar chart of subscription trends",
+    "sql_query": "SELECT DATE(c.subcription_start_date) AS subscription_date,COUNT(*) AS subscription_count FROM subscription_contract_v2 c GROUP BY subscription_date ORDER BY subscription_date LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:11:01"
+  },
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:11:52"
+  },
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": false,
+    "improvement_suggestion": "incorrect pie chart",
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:15:12"
+  },
+  {
+    "question": "Show me total revenue for this month",
+    "sql_query": "SELECT * FROM test_table WHERE query = 'Show me total revenue for this month'",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:22:34"
+  },
+  {
+    "question": "How many subscriptions are active",
+    "sql_query": "SELECT * FROM test_table WHERE query = 'How many subscriptions are active'",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:22:34"
+  },
+  {
+    "question": "revenue",
+    "sql_query": "SELECT * FROM test_table WHERE query = 'revenue'",
+    "was_helpful": false,
+    "improvement_suggestion": "Please be more specific about what revenue data you want to see",
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:22:34"
+  },
+  {
+    "question": "Show me payment success rates over time",
+    "sql_query": "SELECT * FROM test_table WHERE query = 'Show me payment success rates over time'",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:22:34"
+  },
+  {
+    "question": "subscriptions",
+    "sql_query": "SELECT * FROM test_table WHERE query = 'subscriptions'",
+    "was_helpful": false,
+    "improvement_suggestion": "Please specify what subscription information you need",
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:22:34"
+  },
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T06:59:40"
+  },
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": "incorrect pie chart",
+    "chart_type": null,
+    "timestamp": "2025-08-03T07:00:09"
+  },
+  {
+    "question": "Create a pie chart breakdown of successful vs failed payments",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": "incorrect pie chart",
+    "chart_type": null,
+    "timestamp": "2025-08-03T07:00:09"
+  },
+  {
+    "question": "Tell me the last date for which data is available",
+    "sql_query": "SELECT MAX(p.created_date) FROM subscription_payment_details p;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T07:00:22"
+  },
+  {
+    "question": "Tell me the last date for which data is available",
+    "sql_query": "SELECT MAX(updated_date) FROM subscription_payment_details;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T07:00:26"
+  },
+  {
+    "question": "Tell me the last date for which data is available",
+    "sql_query": "SELECT MAX(updated_date) FROM subscription_payment_details;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T07:00:26"
+  },
+  {
+    "question": "number of merchants with more than 5 subscriptions and number of merchants with more than 5 payments",
+    "sql_query": "SELECT COUNT(DISTINCT c.merchant_user_id) AS merchants_with_more_than_5_subscriptions,( SELECT COUNT(DISTINCT merchant_user_id) FROM subscription_payment_details GROUP BY merchant_user_id HAVING COUNT(*) > 5 ) AS merchants_with_more_than_5_payments FROM subscription_contract_v2 c GROUP BY c.merchant_user_id HAVING COUNT(*) > 5;",
+    "was_helpful": false,
+    "improvement_suggestion": "showing database error",
+    "chart_type": null,
+    "timestamp": "2025-08-03T07:01:15"
+  },
+  {
+    "question": "number of merchants with more than 5 subscriptions and number of merchants with more than 5 payments",
+    "sql_query": "SELECT COUNT(DISTINCT c.merchant_user_id) AS merchants_with_more_than_5_subscriptions,( SELECT COUNT(DISTINCT merchant_user_id) FROM subscription_payment_details GROUP BY merchant_user_id HAVING COUNT(*) > 5 ) AS merchants_with_more_than_5_payments FROM subscription_contract_v2 c GROUP BY c.merchant_user_id HAVING COUNT(*) > 5;",
+    "was_helpful": false,
+    "improvement_suggestion": "showing database error",
+    "chart_type": null,
+    "timestamp": "2025-08-03T07:01:15"
+  },
+  {
+    "question": "Create a pie chart shoing the percentage breakdown of payment status (SUCCESSFUL vs FAILED)",
+    "sql_query": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "improvement_suggestion": null,
+    "chart_type": null,
+    "timestamp": "2025-08-03T13:06:08"
+  },
+  {
+    "question": "Create a pie chart shoing the percentage breakdown of payment status (SUCCESSFUL vs FAILED)",
+    "sql_query": "SELECT p.status,COUNT(*) AS count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": false,
+    "improvement_suggestion": "GRAPH NOT RIGHT",
+    "chart_type": null,
+    "timestamp": "2025-08-03T13:06:47"
+  },
+  {
+    "question": "Create a pie chart shoing the percentage breakdown of payment status (SUCCESSFUL vs FAILED)",
+    "sql_query": "SELECT p.status,COUNT(*) AS count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": false,
+    "improvement_suggestion": "GRAPH NOT RIGHT",
+    "chart_type": null,
+    "timestamp": "2025-08-03T13:06:47"
+  }
+]

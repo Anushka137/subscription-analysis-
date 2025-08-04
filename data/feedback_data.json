@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2025-08-03T11:52:34.823634",
+    "original_query": "Show me total revenue for this month",
+    "generated_sql": "SELECT * FROM test_table WHERE query = 'Show me total revenue for this month'",
+    "was_helpful": true,
+    "user_rating": 5,
+    "improvement_suggestion": null,
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 36,
+    "sql_complexity": 1,
+    "keywords": [
+      "revenue",
+      "total"
+    ]
+  },
+  {
+    "id": 2,
+    "timestamp": "2025-08-03T11:52:34.874129",
+    "original_query": "How many subscriptions are active",
+    "generated_sql": "SELECT * FROM test_table WHERE query = 'How many subscriptions are active'",
+    "was_helpful": true,
+    "user_rating": 4,
+    "improvement_suggestion": null,
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 33,
+    "sql_complexity": 1,
+    "keywords": [
+      "subscription"
+    ]
+  },
+  {
+    "id": 3,
+    "timestamp": "2025-08-03T11:52:34.886951",
+    "original_query": "revenue",
+    "generated_sql": "SELECT * FROM test_table WHERE query = 'revenue'",
+    "was_helpful": false,
+    "user_rating": 2,
+    "improvement_suggestion": "Please be more specific about what revenue data you want to see",
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 7,
+    "sql_complexity": 1,
+    "keywords": [
+      "revenue"
+    ]
+  },
+  {
+    "id": 4,
+    "timestamp": "2025-08-03T11:52:34.899566",
+    "original_query": "Show me payment success rates over time",
+    "generated_sql": "SELECT * FROM test_table WHERE query = 'Show me payment success rates over time'",
+    "was_helpful": true,
+    "user_rating": 5,
+    "improvement_suggestion": null,
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 39,
+    "sql_complexity": 1,
+    "keywords": [
+      "payment"
+    ]
+  },
+  {
+    "id": 5,
+    "timestamp": "2025-08-03T11:52:34.914843",
+    "original_query": "subscriptions",
+    "generated_sql": "SELECT * FROM test_table WHERE query = 'subscriptions'",
+    "was_helpful": false,
+    "user_rating": 1,
+    "improvement_suggestion": "Please specify what subscription information you need",
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 13,
+    "sql_complexity": 1,
+    "keywords": [
+      "subscription"
+    ]
+  },
+  {
+    "id": 6,
+    "timestamp": "2025-08-03T12:30:09.739205",
+    "original_query": "Create a pie chart breakdown of successful vs failed payments",
+    "generated_sql": "SELECT p.status,COUNT(*) AS payment_count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": true,
+    "user_rating": 2,
+    "improvement_suggestion": "incorrect pie chart",
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 61,
+    "sql_complexity": 2,
+    "keywords": [
+      "payment",
+      "breakdown"
+    ]
+  },
+  {
+    "id": 7,
+    "timestamp": "2025-08-03T12:30:26.438049",
+    "original_query": "Tell me the last date for which data is available",
+    "generated_sql": "SELECT MAX(updated_date) FROM subscription_payment_details;",
+    "was_helpful": true,
+    "user_rating": null,
+    "improvement_suggestion": null,
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 49,
+    "sql_complexity": 0,
+    "keywords": []
+  },
+  {
+    "id": 8,
+    "timestamp": "2025-08-03T12:31:15.788087",
+    "original_query": "number of merchants with more than 5 subscriptions and number of merchants with more than 5 payments",
+    "generated_sql": "SELECT COUNT(DISTINCT c.merchant_user_id) AS merchants_with_more_than_5_subscriptions,( SELECT COUNT(DISTINCT merchant_user_id) FROM subscription_payment_details GROUP BY merchant_user_id HAVING COUNT(*) > 5 ) AS merchants_with_more_than_5_payments FROM subscription_contract_v2 c GROUP BY c.merchant_user_id HAVING COUNT(*) > 5;",
+    "was_helpful": false,
+    "user_rating": null,
+    "improvement_suggestion": "showing database error",
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 100,
+    "sql_complexity": 8,
+    "keywords": [
+      "payment",
+      "subscription"
+    ]
+  },
+  {
+    "id": 9,
+    "timestamp": "2025-08-03T18:36:47.405805",
+    "original_query": "Create a pie chart shoing the percentage breakdown of payment status (SUCCESSFUL vs FAILED)",
+    "generated_sql": "SELECT p.status,COUNT(*) AS count FROM subscription_payment_details p GROUP BY p.status LIMIT 20;",
+    "was_helpful": false,
+    "user_rating": null,
+    "improvement_suggestion": "GRAPH NOT RIGHT",
+    "actual_sql": null,
+    "chart_type": null,
+    "execution_time": null,
+    "result_count": null,
+    "query_length": 91,
+    "sql_complexity": 2,
+    "keywords": [
+      "payment",
+      "percentage",
+      "breakdown"
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+# Core API dependencies (required)
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+python-dotenv
+mysql-connector-python
+requests
+
+# Semantic learning dependencies (let pip choose compatible versions)
+sentence-transformers
+torch
+faiss-cpu
+numpy
+
+# HTTP and SSL dependencies
+certifi
+urllib3[secure]
+aiohttp
+
+# Graph generation dependencies
+matplotlib
+
+# Additional dependencies
+google-generativeai
